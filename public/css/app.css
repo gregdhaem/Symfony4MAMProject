@@ -1,0 +1,21 @@
+
+div.container {
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+div.ad-title {
+    padding: 2rem;
+    background-size: cover;
+    background-position: center center;
+}
+
+
+div.ad-title h1, div.ad-title p {
+    color: antiquewhite;
+    text-shadow: 3px 3px 3px rgba(13, 12, 12, 0.5)
+}
+
+div.carousel-caption {
+    text-shadow: 3px 3px 3px rgba(14, 13, 13, 0.5)
+}
