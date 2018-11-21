@@ -17,7 +17,7 @@ class AdController extends AbstractController
     public function index(AdRepository $repo, SessionInterface $session)
     {   
         // $repo = $this -> getDoctrine() -> getRepository(Ad::class);
-        dump($session);
+        // dump($session);
         $ads = $repo -> findAll()
 ;
         return $this->render('ad/index.html.twig', [
