@@ -1,7 +1,6 @@
 
 div.container {
     margin-top: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 div.ad-title {
@@ -18,4 +17,8 @@ div.ad-title h1, div.ad-title p {
 
 div.carousel-caption {
     text-shadow: 3px 3px 3px rgba(14, 13, 13, 0.5)
+}
+
+p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

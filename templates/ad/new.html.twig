@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une annonce {% endblock %}
+
+{# {% form_theme form _self %} #}
+
+{% block body %}
+    <div class="container">
+        <h1>Déposez votre annonce</h1>
+
+         {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+
+            <button type="submit" class="btn btn-warning">Validez</button>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{# {% block form_row %}
+    {{ dump() }} 
+    <div class="form-group">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endblock %} #}
+
+
+{# {% block text_widget %}
+    <input type="text" name="{{ full_name }}" id="{{ id }}" class="form_control"
+{% endblock %}
+
+{% block url_widget %}
+    <input type="url" name="{{ full_name }}" id="{{ id }}" class="form_control"
+{% endblock %}
+
+{% block textarea_widget %}
+    <input type="textarea" name="{{ full_name }}" id="{{ id }}" class="form_control"
+{% endblock %} #}
