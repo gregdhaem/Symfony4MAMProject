@@ -7,30 +7,31 @@
     <h1 class="mt-3 mb-4">Nos annonces de bébés à vendre</h1>
     <div class="row">
         {% for ad in ads %}
-        <div class="col-md-4">
-            <div class="card bg-light mb-3">
-                <div class="card-header text-center">
-                    {{ ad.rooms }} chambre(s)<strong> {{ ad.price }} &euro; / nuit</strong><br>
-                        <small>Pas encore noté</small>
-                </div>
-                <a href="{{ path('ads_show', {'slug': ad.slug})}}">
-                    <img src="{{ ad.coverImage }}" alt="Image de l'appartement" 
-                        style="height: 200px; width: 100%; display:block">
-                </a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="{{ path('ads_show', {'slug': ad.slug})}}">
-                            {{ ad.title }}
+            {% set url = path('ads_show', {'slug': ad.slug})%}
+                <div class="col-md-4">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header text-center">
+                            {{ ad.rooms }} chambre(s)<strong> {{ ad.price }} &euro; / nuit</strong><br>
+                                <small>Pas encore noté</small>
+                        </div>
+                        <a href="{{ url }}">
+                            <img src="{{ ad.coverImage }}" alt="Image de l'appartement" 
+                                style="height: 250px; width: 100%; display:block; object-fit: cover">
                         </a>
-                    </h4>
-                    <p class="card-text">
-                        {{ ad.introduction }}
-                    </p>
-                    <a href="{{ path('ads_show', {'slug': ad.slug})}}" 
-                        class="btn btn-secondary">Plus d'info</a>
-                </div>
-            </div>
-        </div>   
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="{{ url }}">
+                                    {{ ad.title }}
+                                </a>
+                            </h4>
+                            <p class="card-text">
+                                {{ ad.introduction }}
+                            </p>
+                            <a href="{{ url }}" 
+                                class="btn btn-warning">Plus d'info</a>
+                        </div>
+                    </div>
+                </div>   
         {% endfor %}
     </div>
 
