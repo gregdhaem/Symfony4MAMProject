@@ -29,7 +29,7 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
-     *      @Assert\Length(
+     * @Assert\Length(
      *      min = 10,
      *      max = 255,
      *      minMessage = "Le titre : {{ value }} ne fait pas {{ limit }} caractères",
@@ -80,6 +80,7 @@ class Ad
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="ad", orphanRemoval=true)
+     * @Assert\Valid()
      */
     private $images;
 
