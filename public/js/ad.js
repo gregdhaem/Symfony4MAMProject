@@ -4,7 +4,7 @@ $('#add-image').click(function(){
     // Récupération du prototype
     const tmplt = $('#ad_images').data('prototype').replace(/__name__/g, index);
 
-    console.log(tmplt);
+    // console.log(tmplt);
     $('#ad_images').append(tmplt);
 
     $('#widgets-counter').val(index + 1);
@@ -19,4 +19,11 @@ function handleDeleteButton() {
     });
 }
 
+function updateCounter(){
+    const count = +$('#ad_images div.form-group').length;
+
+    $('#widgets-counter').val(count);
+}
+
+updateCounter();
 handleDeleteButton();
