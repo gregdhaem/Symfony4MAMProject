@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="mt-3 mb-4">Nos annonces de bébés à vendre</h1>
+    <h1 class="mt-3 mb-4">Nos annonces de locations chez nos membres</h1>
     <div class="row">
         {% for ad in ads %}
             {% set url = path('ads_show', {'slug': ad.slug})%}

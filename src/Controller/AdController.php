@@ -74,6 +74,28 @@ class AdController extends AbstractController
         ]);
     }
 
+
+
+    /**
+     * Permet de modifier une annonce
+     * 
+     * @Route("/ads/{slug}/edit", name="ads_edit")
+     * 
+     * @return Response 
+     */
+    public function edit(Ad $ad, Request $request) 
+    {   
+        $form = $this -> createForm(AdType::class, $ad);
+
+        $form -> handleRequest($request);
+
+        return $this -> render('ad/edit.html.twig', [
+            'form' => $form -> createView(),
+            'ad' => $ad
+        ]);
+    }
+
+
     /**
      * Permet d'afficher une annonce
      * 
