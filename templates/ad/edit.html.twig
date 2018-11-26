@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création d'une annonce {% endblock %}
+{% block title %}Edition de {{ ad.title }} {% endblock %}
 
 {% form_theme form _self %}
 
 {% block body %}
     <div class="container">
-        <h1>Déposez votre annonce</h1>
+        <h1>Mofifiez votre annonce : {{ ad.title }}</h1>
 
          {{ form_start(form) }}
 
@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block _ad_images_widget %}
-    <p>Ajoutez vos photos dans le formulaire ci-dessous </p>
+    <p>Editez vos photos dans le formulaire ci-dessous </p>
 
     {{ form_widget(form) }}
 

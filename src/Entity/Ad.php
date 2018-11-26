@@ -3,13 +3,20 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(
+ *  fields={"title"},
+ *  message="Une annonce possèdant ce titre existe déjà, merci de le modifier" 
+ * )
  */
 class Ad
 {
@@ -22,6 +29,11 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     *      @Assert\Length(
+     *      min = 10,
+     *      max = 255,
+     *      minMessage = "Le titre : {{ value }} ne fait pas {{ limit }} caractères",
+     *      maxMessage = "Le titre ne doit pas dépasser {{ limit }} caractères")
      */
     private $title;
 
@@ -37,16 +49,27 @@ class Ad
 
     /**
      * @ORM\Column(type="text")
+     *      @Assert\Length(
+     *      min = 20,
+     *      minMessage = "L'introduction : {{ value }} ne fait pas {{ limit }} caractères"
+     *  )
      */
     private $introduction;
 
     /**
      * @ORM\Column(type="text")
+     *      @Assert\Length(
+     *      min = 100,
+     *      minMessage = "Le contenu : {{ value }} ne fait pas {{ limit }} caractères"
+     *  )
      */
     private $content;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url(
+     *    message = "L'url {{ value }} n'est pas valide"
+     *  )
      */
     private $coverImage;
 

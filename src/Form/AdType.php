@@ -21,16 +21,17 @@ class AdType extends AbstractType
      * 
      * @param string $label
      * @param string $placeholder
+     * @param array $options
      * @return array
      */
-    private function getFormConfiguration($label, $placeholder) 
+    private function getFormConfiguration($label, $placeholder, $options = []) 
     {
-        return [
+        return array_merge([
             'label' => $label,
             'attr' => [
                 'placeholder' => $placeholder
             ]
-        ];
+        ], $options);
     }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -39,7 +40,9 @@ class AdType extends AbstractType
             $this -> getFormConfiguration('Titre', 'Entrez le titre de l\'annonce...'))
 
         -> add('slug', TextType::class, 
-            $this -> getFormConfiguration('URL', '(Automatique)'))
+            $this -> getFormConfiguration('URL', '(Automatique)', [
+                'required' => false 
+            ]))
 
         -> add('coverImage', UrlType::class,
             $this -> getFormConfiguration('URL de l\'image pricipale', 'Insérez l\'image principale...'))
