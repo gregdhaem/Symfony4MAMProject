@@ -14,17 +14,16 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class AdController extends AbstractController
-{
+class AdController extends AbstractController {
+
     /**
      * @Route("/ads", name="ads_index")
      */
-    public function index(AdRepository $repo, SessionInterface $session)
-    {   
+    public function index(AdRepository $repo, SessionInterface $session) {   
         // $repo = $this -> getDoctrine() -> getRepository(Ad::class);
         // dump($session);
-        $ads = $repo -> findAll()
-;
+        $ads = $repo -> findAll();
+
         return $this->render('ad/index.html.twig', [
             'ads' => $ads
         ]);
@@ -37,8 +36,7 @@ class AdController extends AbstractController
      * 
      * @return Response 
      */
-    public function create(Request $request, ObjectManager $manager)
-    {   
+    public function create(Request $request, ObjectManager $manager) {   
         $ad = new Ad();
 
         $form = $this -> createForm(AdType::class, $ad);
@@ -74,8 +72,6 @@ class AdController extends AbstractController
         ]);
     }
 
-
-
     /**
      * Permet de modifier une annonce
      * 
@@ -83,8 +79,7 @@ class AdController extends AbstractController
      * 
      * @return Response 
      */
-    public function edit(Ad $ad, Request $request, ObjectManager $manager) 
-    {   
+    public function edit(Ad $ad, Request $request, ObjectManager $manager) {   
         $form = $this -> createForm(AdType::class, $ad);
 
         $form -> handleRequest($request);
@@ -123,8 +118,7 @@ class AdController extends AbstractController
      * 
      * @return Response
      */
-    public function show(Ad $ad) // Param Converter
-    {
+    public function show(Ad $ad) {// Param Converter 
         // Récupération l'annonce qui correspond au slug !
         // $ad = $repo -> findOneBySlug($slug);
         return $this -> render('ad/show.html.twig', [

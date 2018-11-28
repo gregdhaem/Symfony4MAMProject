@@ -21,25 +21,25 @@ class RegistrationType extends ApplicationType
         $builder
             ->add('firstName', TextType::class,
                 $this -> getFormConfiguration(
-                    "Prénom", "Indiquez votre prénom..."))
+                    "Prénom", "Indiquez votre prénom ..."))
             ->add('lastName', TextType::class,
                 $this -> getFormConfiguration(
-                    "Nom", "Indiquez votre nom de famille..."))
+                    "Nom", "Indiquez votre nom de famille ..."))
             ->add('email', EmailType::class,
                 $this -> getFormConfiguration(
-                    "Email", "Indiquez votre email..."))
+                    "Email", "Indiquez votre email ..."))
             ->add('picture', UrlType::class,
                 $this -> getFormConfiguration(
-                    "Avatar", "Url d'une photo..."))
+                    "Avatar", "Url d'une photo ..."))
             ->add('hash', PasswordType::class,
                 $this -> getFormConfiguration(
-                    "Mot de passe", "Choisissez un mot de passe..."))
+                    "Mot de passe", "Choisissez un mot de passe ..."))
             ->add('passwordConfirm', PasswordType::class,
                 $this -> getFormConfiguration(
-                    "Confirmation du mot de passe","Veuillez confirmer votre mot de passe..."))
+                    "Confirmation du mot de passe","Veuillez confirmer votre mot de passe ..."))
             ->add('introduction', TextType::class,
                 $this -> getFormConfiguration(
-                    "Introduction,", "Quelques mots pour vous décrire..."))
+                    "Introduction,", "Quelques mots pour vous décrire ..."))
             ->add('description', TextareaType::class,
                 $this -> getFormConfiguration(
                     "Description", "Décrivez vous en détail"))
