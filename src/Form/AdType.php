@@ -22,7 +22,7 @@ class AdType extends ApplicationType
     {
         $builder
         -> add('title', TextType::class, 
-            $this -> getFormConfiguration('Titre', 'Entrez le titre de l\'annonce...'))
+            $this -> getFormConfiguration('Titre', 'Entrez le titre de l\'annonce ...'))
 
         -> add('slug', TextType::class, 
             $this -> getFormConfiguration('URL', '(Automatique)', [
@@ -30,19 +30,19 @@ class AdType extends ApplicationType
             ]))
 
         -> add('coverImage', UrlType::class,
-            $this -> getFormConfiguration('URL de l\'image pricipale', 'Insérez l\'image principale...'))
+            $this -> getFormConfiguration('URL de l\'image pricipale', 'Insérez l\'image principale ...'))
 
         -> add('introduction', TextType::class, 
-            $this -> getFormConfiguration('Introduction', 'Décrivez le bien en une ligne...'))
+            $this -> getFormConfiguration('Introduction', 'Décrivez le bien en une ligne ...'))
 
         -> add('content', TextareaType::class,
-            $this -> getFormConfiguration('Description', 'Description complète de l\'annonce...'))
+            $this -> getFormConfiguration('Description', 'Description complète de l\'annonce ...'))
 
         -> add('rooms', IntegerType::class, 
-            $this -> getFormConfiguration('Nbr. de chambres', 'Indiquez le nombre ce chambres disponibles...'))
+            $this -> getFormConfiguration('Nbr. de chambres', 'Indiquez le nombre ce chambres disponibles ...'))
 
         -> add('price', MoneyType::class,       
-            $this -> getFormConfiguration('Prix par nuit', 'Indiquez le prix par nuitée...'))
+            $this -> getFormConfiguration('Prix par nuit', 'Indiquez le prix par nuitée ...'))
         
         -> add('images', CollectionType::class,
             [
