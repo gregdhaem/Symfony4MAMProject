@@ -7,6 +7,7 @@ use App\Form\AccountType;
 use App\Entity\PasswordUpdate;
 use App\Form\RegistrationType;
 use App\Form\PasswordUpdateType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -124,10 +125,38 @@ class AccountController extends AbstractController
      *  
      * @return Response
      */
-    public function updatePassword() {
+    public function updatePassword(Request $request, UserPasswordEncoderInterface $encoder, ObjectManager $manager) {
         $passwordUpdate = new PasswordUpdate();
 
+        $user = $this -> getUser();
+
         $form = $this -> createForm(PasswordUpdateType::class, $passwordUpdate);
+
+        $form -> handleRequest($request);
+
+        if($form -> isSubmitted() && $form -> isValid()) {
+
+            if(!password_verify($passwordUpdate -> getOldPassword(), $user -> getHash())) {
+
+                $form -> get('oldPassword') -> addError(new FormError("Veuillez indiquer votre ancien mot de passe"));
+
+            } else {
+                $newPassword = $passwordUpdate -> getNewPassword();
+                $hash = $encoder -> encodePassword($user, $newPassword);
+
+                $user -> setHash($hash);
+
+                $manager -> persist($user);
+                $manager -> flush();
+
+                $this -> addFlash(
+                    'success',
+                    'Les modifications du mot de passe ont été enregistrées'
+                );
+
+                return $this -> redirectToRoute('ads_index');
+            };
+        }
 
         return $this -> render('account/password.html.twig', [
             'form' => $form -> createView()
