@@ -91,6 +91,11 @@ class User implements UserInterface
      */
     private $ads;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="users")
+     */
+    private $userRoles;
+
     public function getFullName() {
         return "{$this -> firstName} {$this -> lastName}";
     }
@@ -112,106 +117,107 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->ads = new ArrayCollection();
+        $this -> ads = new ArrayCollection();
+        $this -> userRoles = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this -> id;
     }
 
     public function getFirstName(): ?string
     {
-        return $this->firstName;
+        return $this -> firstName;
     }
 
     public function setFirstName(string $firstName): self
     {
-        $this->firstName = $firstName;
+        $this -> firstName = $firstName;
 
         return $this;
     }
 
     public function getLastName(): ?string
     {
-        return $this->lastName;
+        return $this -> lastName;
     }
 
     public function setLastName(string $lastName): self
     {
-        $this->lastName = $lastName;
+        $this -> lastName = $lastName;
 
         return $this;
     }
 
     public function getEmail(): ?string
     {
-        return $this->email;
+        return $this -> email;
     }
 
     public function setEmail(string $email): self
     {
-        $this->email = $email;
+        $this -> email = $email;
 
         return $this;
     }
 
     public function getPicture(): ?string
     {
-        return $this->picture;
+        return $this -> picture;
     }
 
     public function setPicture(?string $picture): self
     {
-        $this->picture = $picture;
+        $this -> picture = $picture;
 
         return $this;
     }
 
     public function getHash(): ?string
     {
-        return $this->hash;
+        return $this -> hash;
     }
 
     public function setHash(string $hash): self
     {
-        $this->hash = $hash;
+        $this -> hash = $hash;
 
         return $this;
     }
 
     public function getIntroduction(): ?string
     {
-        return $this->introduction;
+        return $this -> introduction;
     }
 
     public function setIntroduction(string $introduction): self
     {
-        $this->introduction = $introduction;
+        $this -> introduction = $introduction;
 
         return $this;
     }
 
     public function getDescription(): ?string
     {
-        return $this->description;
+        return $this -> description;
     }
 
     public function setDescription(string $description): self
     {
-        $this->description = $description;
+        $this -> description = $description;
 
         return $this;
     }
 
     public function getSlug(): ?string
     {
-        return $this->slug;
+        return $this -> slug;
     }
 
     public function setSlug(string $slug): self
     {
-        $this->slug = $slug;
+        $this -> slug = $slug;
 
         return $this;
     }
@@ -221,14 +227,14 @@ class User implements UserInterface
      */
     public function getAds(): Collection
     {
-        return $this->ads;
+        return $this -> ads;
     }
 
     public function addAd(Ad $ad): self
     {
-        if (!$this->ads->contains($ad)) {
-            $this->ads[] = $ad;
-            $ad->setAuthor($this);
+        if (!$this -> ads -> contains($ad)) {
+            $this -> ads[] = $ad;
+            $ad -> setAuthor($this);
         }
 
         return $this;
@@ -236,11 +242,11 @@ class User implements UserInterface
 
     public function removeAd(Ad $ad): self
     {
-        if ($this->ads->contains($ad)) {
-            $this->ads->removeElement($ad);
+        if ($this -> ads -> contains($ad)) {
+            $this -> ads -> removeElement($ad);
             // set the owning side to null (unless already changed)
-            if ($ad->getAuthor() === $this) {
-                $ad->setAuthor(null);
+            if ($ad -> getAuthor() === $this) {
+                $ad -> setAuthor(null);
             }
         }
 
@@ -248,10 +254,18 @@ class User implements UserInterface
     }
 
 
-
+    /**
+     * 
+     */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        $roles = $this -> userRoles -> map(function($roles) {
+            return $roles -> getTitle();
+        }) -> toArray();
+
+        $roles[] = 'ROLE_USER';
+
+        return $roles;
     }
 
     public function getPassword()
@@ -272,5 +286,33 @@ class User implements UserInterface
     public function eraseCredentials()
     {
 
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getUserRoles(): Collection
+    {
+        return $this -> userRoles;
+    }
+
+    public function addUserRole(Role $userRole): self
+    {
+        if (!$this -> userRoles -> contains($userRole)) {
+            $this -> userRoles[] = $userRole;
+            $userRole -> addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserRole(Role $userRole): self
+    {
+        if ($this -> userRoles -> contains($userRole)) {
+            $this -> userRoles -> removeElement($userRole);
+            $userRole -> removeUser($this);
+        }
+
+        return $this;
     }
 }
