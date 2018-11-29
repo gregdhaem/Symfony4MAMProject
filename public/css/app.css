@@ -31,6 +31,11 @@ p {
     border-radius: 50%
 }
 
+.avatar-mini {
+    max-width: 32px;
+    max-height: 32px;
+}
+
 .avatar-medium {
     max-width: 64px;
     max-height: 64px;
