@@ -21,14 +21,16 @@
                     \nou sur 'Annuler' pour revenir en arrière`)">Supprimez</a>
 
         {% else %}
-            <a href="#" class="btn btn-warning">Réservez !</a>
+            <a href="{{ path('booking_create', {'slug': ad.slug}) }}" class="btn btn-warning">Réservez !</a>
         {% endif %}
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-md-8 mb-3">
-            {{ ad.content|raw }}
+            <div class="mb-3 text-justify">
+                {{ ad.content|raw }}
+            </div>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     {% for image in ad.images %}
@@ -72,7 +74,7 @@
                     <span class="badge badge-warning"> {{ a.ads | length }} annonce(s) </span> 
                 </div>           
             </div>
-            <p>{{ a.description | raw }}</p>
+            <p class="text-justify">{{ a.description | raw }}</p>
         </div>
     </div>
 </div>

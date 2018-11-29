@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservez une location {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Réservez l'annonce {{ ad.title }} de {{ ad.author.fullName }}</h1>
+
+         {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+
+            <button type="submit" class="btn btn-warning">Validez</button>
+            <h4>Montant du séjour</h4>
+        {{ form_end(form) }}
+
+        <h4> montant du séjour</h4>
+</div>
+{% endblock %}

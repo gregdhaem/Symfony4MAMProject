@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur 403 {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-3 mb-4 text-center">Action non autorisée, Erreur 403</h1>
+        <div class="row mb-3">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-6">
+                <img src="/img/403.jpeg" alt="404" style="height: 300px; width: 100%; display:block; object-fit: cover">
+                <a href="{{ path('homepage') }}" class="mt-3 btn btn-warning">Retour à l'accueil</a>
+                <a href="{{ path('ads_index') }}" class="mt-3 btn btn-warning">Nos annonces</a>
+            </div>           
+        </div>
+    </div>
+{% endblock %}
