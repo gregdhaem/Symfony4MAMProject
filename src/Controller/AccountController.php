@@ -161,6 +161,18 @@ class AccountController extends AbstractController
         return $this -> render('account/password.html.twig', [
             'form' => $form -> createView()
         ]);
+    }
 
+    /**
+     * Affichage du profil de l'utilisateur connecté
+     * 
+     * @Route("/account", name="account_index")
+     * 
+     * @return Response
+     */
+    public function myAccount() {
+        return $this -> render('user/index.html.twig', [
+            'user' => $this -> getUser()
+        ]);
     }
 }
