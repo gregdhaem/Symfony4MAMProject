@@ -56,12 +56,12 @@ class AppFixtures extends Fixture
             $picture = 'https://randomuser.me/api/portraits/';
             $pictureId = $faker -> numberBetween(1, 99);
 
-            $picture .= ($genre == 'male' ? 'men/' : 'women/') . $pictureId . '.jpg';
+            $picture .= ($genre === 'male' ? 'men/' : 'women/') . $pictureId . '.jpg';
 
             $hash = $this -> encoder -> encodePassword($user, 'password');
 
-            $user -> setFirstName($faker -> firstname)
-                    -> setLastName($faker -> lastname)
+            $user -> setFirstName($faker -> firstName($gender))
+                    -> setLastName($faker -> lastName)
                     -> setEmail($faker -> email)
                     -> setIntroduction($faker -> sentence())
                     -> setDescription('<p>' . join('</p><p>', $faker -> paragraphs(3)) . '</p>')

@@ -13,8 +13,16 @@
         <p class="h2">
             <strong>{{ ad.rooms }} chambre</strong> pour <strong>{{ ad.price }} &euro; </strong> par nuit 
         </p>
-        <a href="#" class="btn btn-warning">Réservez !</a>
+        {% if app.user and app.user == ad.author %}
+            <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-warning">Modifiez</a>
+            <a href="{{ path('ads_delete', {'slug': ad.slug}) }}" class="btn btn-danger" 
+            onclick="return confirm(`Votre annonce '{{ ad.title }}' va être supprimée ! 
+                    \nClikez sur 'Ok' pour valider 
+                    \nou sur 'Annuler' pour revenir en arrière`)">Supprimez</a>
 
+        {% else %}
+            <a href="#" class="btn btn-warning">Réservez !</a>
+        {% endif %}
     </div>
 </div>
 <div class="container">
