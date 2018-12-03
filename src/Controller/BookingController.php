@@ -31,17 +31,38 @@ class BookingController extends AbstractController
 
             $booking -> setBooker($user)
                     -> setAd($ad);
-        
-            $manager -> persist($booking);
-            $manager -> flush();
 
-            return $this -> redirectToRoute('booking_success', [
-                'id' => $booking -> getId()]);
+            if(!$booking -> areDatesBookable()) {
+                $this -> addFlash(
+                    'warning',
+                    "Les dates que vous avez choisies ne sont pas disponibles"
+                );
+            } else {
+                $manager -> persist($booking);
+                $manager -> flush();
+    
+                return $this -> redirectToRoute('booking_show', [
+                    'id' => $booking -> getId(),
+                    'withAlert' => true]);
+            }
         }
         
         return $this->render('booking/book.html.twig', [
             'ad' => $ad,
             'form' => $form -> createView()
+        ]);
+    }
+
+
+    /**
+     * Permet d'afficher la page d'une résa
+     * 
+     * @Route("/booking/{id}", name="booking_show")
+     * 
+     */
+    public function show(Booking $booking) {
+        return $this -> render('booking/show.html.twig', [
+            'booking' => $booking
         ]);
     }
 }

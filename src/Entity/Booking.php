@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookingRepository")
@@ -31,11 +33,13 @@ class Booking
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date(message="Problème de format de date")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Date(message="Problème de format de date")
      */
     private $endDate;
 
@@ -71,6 +75,45 @@ class Booking
             // Prix de l'annonce x Nombre de jours
             $this -> amount = $this -> ad -> getPrice() * $this -> getDuration();
         }
+    }
+
+    public function areDatesBookable() {
+        // connaitre les dates non disponibles
+        $notAvailableDays = $this -> ad -> getNotAvailableDays();
+        // Comparer les dates choisies avec les dates non disponibles
+        $bookingDays = $this -> getDays();
+
+        $days = array_map(function($day) {
+            return $day -> format('Y-m-d');
+        }, $bookingDays);
+
+        $notAvailable = array_map(function($day) {
+            return $day -> format('Y-m-d');
+        }, $notAvailableDays);
+
+        foreach($days as $day) {
+            if(array_search($day, $notAvailable) !== false) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Récupération des journées de la réservation
+     * 
+     * @return array Objets DateTime
+     */
+    public function getDays() {
+        $result = range(
+            $this -> startDate -> getTimestamp(),
+            $this -> endDate -> getTimestamp(),
+            24 * 60 * 60
+        );
+
+        $days = array_map(function($dayTimestamp) {
+            return new \DateTime(date('Y-m-d', $dayTimestamp));
+        }, $result);
+
+        return $days;
     }
 
     public function getDuration() {

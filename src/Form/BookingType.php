@@ -28,7 +28,8 @@ class BookingType extends ApplicationType
             ->add('comment', TextareaType::class,
                 $this -> getFormConfiguration(
                     false,
-                    "Indiquez un commentaire si besoin..."
+                    "Indiquez un commentaire si besoin...",
+                    ['required' => false]
                 ))
         ;
     }
