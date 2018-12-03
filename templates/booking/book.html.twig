@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réservez une location {% endblock %}
+{% block title %}Réservez {{ ad.title }} {% endblock %}
 
 {% block body %}
 
 <div class="container">
-    <h1>Réservez l'annonce {{ ad.title }} de {{ ad.author.fullName }}</h1>
+    <h1>Réservez l'annonce {{ ad.title }}</h1>
+        <p>Vous allez réservez le bien de <strong>{{ ad.author.fullName }}</strong></p>
 
          {{ form_start(form) }}
 
-            {{ form_widget(form) }}
+        <div class="alert alert-light">
+            <h2>Indiquez vos dates de séjour ci dessous</h2>
+            <div class="row">
+                <div class="col">
 
-            <button type="submit" class="btn btn-warning">Validez</button>
-            <h4>Montant du séjour</h4>
+                    {{ form_row(form.startDate) }}
+
+                </div>
+                <div class="col">
+
+                    {{ form_row(form.endDate) }}
+
+                </div>
+            </div>
+        </div>
+
+
+        <h4>Montant du séjour : <span id="amount">...</span> &euro;</h4>
+        <p><span id="days">0</span> nuit(s) à {{ ad.price }} &euro; / nuit</p>
+
+        <h2>Ajoutez un commentaire (optionnel)</h2>
+
+        {{ form_row(form.comment) }}
+
+        <button type="submit" class="btn btn-warning">Validez</button>
+        
         {{ form_end(form) }}
-
-        <h4> montant du séjour</h4>
 </div>
 {% endblock %}
