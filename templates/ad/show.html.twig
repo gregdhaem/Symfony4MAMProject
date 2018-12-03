@@ -19,9 +19,8 @@
             onclick="return confirm(`Votre annonce '{{ ad.title }}' va être supprimée ! 
                     \nClikez sur 'Ok' pour valider 
                     \nou sur 'Annuler' pour revenir en arrière`)">Supprimez</a>
-
         {% else %}
-            <a href="{{ path('booking_create', {'slug': ad.slug}) }}" class="btn btn-warning">Réservez !</a>
+            <a href="{{ path('booking_create', {'slug': ad.slug}) }}" class="btn btn-warning">Réservez</a>
         {% endif %}
     </div>
 </div>
