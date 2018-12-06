@@ -1,6 +1,7 @@
 body {
-    background: lightsteelblue;
+    background: #a9b2bd;
 }
+
 div.container {
     margin-top: 20px;
 }
@@ -15,6 +16,12 @@ div.ad-title {
 div.ad-title h1, div.ad-title p {
     color: antiquewhite;
     text-shadow: 3px 3px 3px rgba(13, 12, 12, 0.5)
+}
+
+div.ad-title .btn {
+    margin-top: 2em;
+    font-size: 1.5em;
+    line-height: 1.5em;
 }
 
 div.carousel-caption {
@@ -47,4 +54,13 @@ p {
 
 .rating {
     color: #e7e70c !important;
+}
+
+.alert a, .card-title a
+{
+    text-decoration: none;
+}
+
+.alert .btn {
+    color: white;
 }

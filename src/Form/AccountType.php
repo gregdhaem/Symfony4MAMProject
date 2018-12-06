@@ -3,21 +3,38 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class AccountType extends AbstractType
+class AccountType extends ApplicationType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('email')
-            ->add('picture')
-            ->add('introduction')
-            ->add('description')
+            ->add('firstName', TextType::class,
+            $this -> getFormConfiguration(
+                "Prénom", "Indiquez votre prénom ..."))
+            ->add('lastName',TextType::class,
+            $this -> getFormConfiguration(
+                "Nom", "Indiquez votre nom de famille ..."))
+            ->add('email', EmailType::class,
+            $this -> getFormConfiguration(
+                "Email", "Indiquez votre email ..."))
+            ->add('picture', UrlType::class,
+            $this -> getFormConfiguration(
+                "Avatar", "Url d'une photo ..."))
+            ->add('introduction', TextType::class,
+            $this -> getFormConfiguration(
+                "Introduction,", "Quelques mots pour vous décrire ..."))
+            ->add('description', TextareaType::class,
+            $this -> getFormConfiguration(
+                "Description", "Décrivez vous en détail"))
         ;
     }
 

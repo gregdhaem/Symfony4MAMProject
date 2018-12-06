@@ -6,14 +6,41 @@
 
 {% block body %}
     <div class="container">
-        <h1>Déposez votre annonce</h1>
+        <h1 class="my-5">Déposez votre annonce</h1>
 
-         {{ form_start(form) }}
+        {{ form_start(form) }}
 
-            {{ form_widget(form) }}
-
-            <button type="submit" class="btn btn-warning">Validez</button>
-
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2 class="alert-heading">Informations Générales</h2>
+                    <hr>
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.slug) }}
+                    {{ form_row(form.price) }}
+                    {{ form_row(form.rooms) }}
+                </div>
+                <div class="alert alert-light">
+                <h2 class="alert-heading">Détails de l'annonce</h2>
+                    <hr>
+                    {{ form_row(form.introduction) }}
+                    {{ form_row(form.content) }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="alert alert-light">
+                    <h2 class="alert-heading">Images de l'annonce</h2>
+                    <hr>
+                    {{ form_row(form.coverImage) }}
+                    {{ form_row(form.images) }}
+                </div>
+            </div>
+        </div>
+            
+        <div class="alert alert-light clearfix">
+        <p>Enregistrez votre annonce</p>
+            <button type="submit" class="btn btn-warning float-right"><i class="fas fa-check"></i> Validez</button>
+        </div>
         {{ form_end(form) }}
     </div>
 {% endblock %}
