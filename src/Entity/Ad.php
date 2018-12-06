@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -123,9 +124,24 @@ class Ad
     }
 
     /**
+     * Récuprératoin du commentaire d'un auteur
+     * 
+     * @param User $author
+     * 
+     * @return Comment|null
+     */
+    public function getCommentFromAuthor(User $user) {
+        foreach($this -> comments as $comment) {
+            if($comment -> getAuthor() === $user) return $comment;
+        }
+        return null;
+    }
+
+
+    /**
      * Calcul de la note moyenne
      * 
-     * 
+     * @return float
      */
     public function getAvgRating(){
         // somme des notes 

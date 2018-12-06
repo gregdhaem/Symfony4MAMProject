@@ -62,7 +62,7 @@ class AppFixtures extends Fixture
 
             $hash = $this -> encoder -> encodePassword($user, 'password');
 
-            $user -> setFirstName($faker -> firstName($gender))
+            $user -> setFirstName($faker -> firstName($genre))
                     -> setLastName($faker -> lastName)
                     -> setEmail($faker -> email)
                     -> setIntroduction($faker -> sentence())
