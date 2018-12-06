@@ -42,7 +42,11 @@ class RegistrationType extends ApplicationType
                     "Introduction,", "Quelques mots pour vous décrire ..."))
             ->add('description', TextareaType::class,
                 $this -> getFormConfiguration(
-                    "Description", "Décrivez vous en détail"))
+                    "Description", "Décrivez vous en détail ...", [
+                        'attr' => [
+                            'rows' => 16
+                        ]
+                    ]))
         ;
     }
 

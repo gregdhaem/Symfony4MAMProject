@@ -11,7 +11,7 @@
             {{ ad.introduction }}
         </p>
         <p class="h2">
-            <strong>{{ ad.rooms }} chambre</strong> pour <strong>{{ ad.price }} &euro; </strong> par nuit 
+            <strong>{{ ad.rooms }} chambre(s)</strong> pour <strong>{{ ad.price | number_format(2, ',', ' ')}} &euro; </strong> par nuit 
         </p>
         {% if app.user and app.user == ad.author %}
             <a href="{{ path('ads_edit', {'slug': ad.slug}) }}" class="btn btn-warning">Modifiez</a>
