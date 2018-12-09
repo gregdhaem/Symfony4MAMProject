@@ -23,9 +23,11 @@
                     {{ app.user.fullName }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
-                    <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>
                     <a href="{{ path('ads_create') }}" class="dropdown-item">Ajoutez une annonce</a>
+                    <div class="dropdown-divider"></div>
                     <a href="{{ path('account_bookings') }}" class="dropdown-item">Mes réservations</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ path('account_profile') }}" class="dropdown-item">Modifiez profil</a>
                     <a href="{{ path('account_password') }}" class="dropdown-item">Modifiez mot de passe</a>

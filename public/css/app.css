@@ -1,5 +1,5 @@
 body {
-    background: #a9b2bd;
+    background: #cedff5;
 }
 
 div.container {
@@ -63,4 +63,10 @@ p {
 
 .alert .btn {
     color: white;
+}
+
+@media screen and (max-width: 499px) {
+    .display-3 {
+        font-size: 3rem;
+    }
 }
