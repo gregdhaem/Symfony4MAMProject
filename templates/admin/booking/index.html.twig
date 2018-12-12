@@ -1,0 +1,52 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Réservations de {% endblock %}
+
+{% block body %}
+    <div class="container-fluid table-responsive">
+        <h1 class="my-5"> Gestion des réservations</h1>
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Date d'enregistrement</th>
+                    <th>Voyageur</th>
+                    <th>Annonce</th>
+                    <th>Propriétaire</th>
+                    <th class="text-center">Date d'arrivée</th>
+                    <th class="text-center">Date de départ</th>
+                    <th class="text-center">Montant</th>
+                    <th>Commentaire</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td class="text-center">{{ booking.id }}</td>
+                    <td class="text-center">{{ booking.createdAt | date('d/m/Y') }}</td>
+                    <td>
+                        <img src="{{ booking.booker.picture }}" alt="Avatar de {{ booking.booker.fullname }}" class="avatar avatar-mini mr-2">
+                        {{ booking.booker.fullname }}
+                    </td>
+                    <td>{{ booking.ad.title }}</td>
+                    <td>
+                        <img src="{{ booking.ad.author.picture }}" alt="Avatar de {{ booking.ad.author.fullname }}" class="avatar avatar-mini mr-2">
+                        {{ booking.ad.author.fullname }}
+                    </td>
+                    <td class="text-center">{{ booking.startDate | date('d/m/Y') }}</td>
+                    <td class="text-center">{{ booking.endDate | date('d/m/Y') }}</td>
+                    <td class="text-center">
+                        <span class="badge badge-light rounded">{{ booking.amount | number_format(2, ',', ' ') }}</span>
+                    <td>{{ booking.comment | slice(1, 30)}} ....</td>
+                    <td class="text-center">
+                        <a href="{#{ path('admin_ads_edit', {'id': ad.id}) }#}" class="btn btn-light"><i class="fas fa-eye"></i></a>
+                        <a href="{#{ path('admin_ads_edit', {'id': ad.id}) }#}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                        <a href="{#{ path('admin_ads_delete', {'id': ad.id}) }#}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
