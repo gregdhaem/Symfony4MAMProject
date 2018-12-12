@@ -1,0 +1,218 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edition de {{ ad.id }} {% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+<div class="container">
+    <h1 class="my-5">Annonce n° ({{ ad.id }}) : "{{ ad.title }}" de {{ ad.author.fullName | upper }}
+        - utilisateur ({{ ad.author.id }})</h1>
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-light">
+                <h2 class="alert-heading">Informations Générales</h2>
+                <hr>
+                {{ form_row(form.title) }}
+                {{ form_row(form.slug) }}
+                {{ form_row(form.price) }}
+                {{ form_row(form.rooms) }}
+            </div>
+            <div class="alert alert-light">
+                <h2 class="alert-heading">Détails de l'annonce</h2>
+                <hr>
+                {{ form_row(form.introduction) }}
+                {{ form_row(form.content) }}
+            </div>
+
+            <div class="alert alert-light">
+                <h2 class="alert-heading">Images de l'annonce</h2>
+                <hr>
+                {{ form_row(form.coverImage) }}
+                {{ form_row(form.images) }}
+            </div>
+        </div>
+        <div class="col">
+            <div class="alert alert-light">
+                <h2 class="alert-heading">Réservations de l'annonce</h2>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Voyageur
+                            </th>
+                            <th>
+                                Date de réservation
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in ad.bookings %}
+                        <tr>
+                            <td>
+                                {{ booking.id }}
+                            </td>
+                            <td>
+                                {{ booking.booker.fullname }}
+                            </td>
+                            <td>
+                                {{ booking.createdAt | date('d/m/Y H:i' )}}
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-warning">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert alert-light">
+                <h2 class="alert-heading">Commentaires de l'annonce</h2>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Voyageur
+                            </th>
+                            <th>
+                                Note
+                            </th>
+                            <th>
+                                Commentaires
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comment in ad.comments %}
+                        <tr>
+                            <td>
+                                {{ comment.id }}
+                            </td>
+                            <td>
+                                {{ comment.author.fullname }}
+                            </td>
+                            <td>
+                                {{ comment.rating }}
+                            </td>
+                            <td>
+                                {{ comment.content }}
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-warning">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-light clearfix">
+        <p>Enregistrez les modifications</p>
+        <button type="submit" class="btn btn-warning float-right"><i class="fas fa-check"></i> Validez</button>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}
+
+{% block _ad_images_widget %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _ad_images_entry_row %}
+    {# {{ dump() }} #}
+    <div id="block_{{id}}">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block _ad_images_entry_widget %}
+    <div class="form-group" id="block_{{ id }}">
+            <div class="row">
+                <div class="col">
+                    <div class="mt-1">
+                    {% if data %}
+                    <img src="{{ data.url }}" class="img-fluid" alt="{{ data.caption }}" class="mb-1">
+                    {% endif %}
+                    </div>
+                    {{ form_errors(form.url) }}
+                    {{ form_widget(form.url) }}
+                    
+                </div>
+            </div>  
+            <div class="row mt-1">
+                <div class="col">
+
+                    {{ form_errors(form.caption) }}
+                    {{ form_widget(form.caption) }}                      
+                </div>
+
+                <div class="col-2">
+                    <button type="button" data-action="delete" data-target="#block_{{id}}" class="btn btn-small btn-danger">X</button>
+                </div>
+            </div>
+    </div>
+
+
+
+
+    {# <div class="row align-items-center mb-3">
+        <div class="col-4">
+            {% if data %}
+            <div class="form-group">
+                <img src="{{ data.url }}" class="img-fluid" alt="{{ value.caption }}>
+            </div>
+            {% endif %} 
+            {{ form_row(form.url) }} 
+
+        </div>
+
+        <div class="col-6">
+            {{ form_row(form.caption) }}
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    </div>#}
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+            $('[data-action="delete"]').on('click', function(){
+                const target = this.dataset.target;
+                //console.log(target);
+                $(target).remove();
+            });
+        });
+
+    </script>
+
+{% endblock %}

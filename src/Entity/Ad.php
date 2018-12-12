@@ -3,11 +3,15 @@
 namespace App\Entity;
 
 use App\Entity\User;
+use App\Entity\Image;
+use App\Entity\Booking;
+use App\Entity\Comment;
+
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
-
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
