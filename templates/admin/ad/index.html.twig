@@ -26,13 +26,13 @@
                         {{ ad.author.fullname }}
                     </td>
                     <td class="text-center">
-                        <span class="badge badge-warning rounded">{{ ad.bookings | length }}</span>
+                        <span class="badge badge-dark rounded">{{ ad.bookings | length }}</span>
                     </td>
                     <td class="text-center">
-                        <span class="badge badge-warning rounded">{{ ad.avgRating | number_format(1, ',', ' ') }}</span>
+                        <span class="badge badge-dark rounded">{{ ad.avgRating | number_format(1, ',', ' ') }}</span>
                     <td>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        <a href="{{ path('admin_ads_edit', {'id': ad.id}) }}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                        <a href="{{ path('admin_ads_delete', {'id': ad.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 {% endfor %}
