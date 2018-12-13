@@ -9,8 +9,7 @@
 {{ form_start(form) }}
 
 <div class="container-fluid">
-    <h1 class="my-5">Annonce n° ({{ ad.id }}) : "{{ ad.title }}" de {{ ad.author.fullName | upper }}
-        - utilisateur ({{ ad.author.id }})</h1>
+    <h1 class="my-5">Annonce n° ({{ ad.id }}) : "{{ ad.title | trim('.') }}" de l'utilisateur n° ({{ ad.author.id }}) : {{ ad.author.fullName | upper }}</h1>
     <div class="row">
         <div class="col">
             <div class="alert alert-light">
@@ -32,7 +31,11 @@
                 <h2 class="alert-heading">Images de l'annonce</h2>
                 <hr>
                 {{ form_row(form.coverImage) }}
-                {{ form_row(form.images) }}
+                <hr>
+                {{ form_label(form.images) }}
+                <div class=" text-center">              
+                {{ form_widget(form.images) }}
+                </div>
             </div>
         </div>
         <div class="col">
@@ -156,7 +159,7 @@
                 <div class="col">
                     <div class="mt-1">
                     {% if data %}
-                    <img src="{{ data.url }}" class="img-fluid" alt="{{ data.caption }}" class="mb-1">
+                    <img src="{{ data.url }}" alt="{{ data.caption }}" class="mb-1">
                     {% endif %}
                     </div>
                     {{ form_errors(form.url) }}

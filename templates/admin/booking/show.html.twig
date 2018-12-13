@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ booking.id }} {% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid">
+    <h1 class="mt-5"> Réservation de {{ booking.booker.fullName }}</h1>
+    <h2 class="my-3">Voyageur n° {{ booking.booker.id }}</h2>
+    <div class="alert alert-light"
+        <div class="col mb-3">
+            <dl class="row">
+                <dt class="col-md-4">Date de réservation</dt>
+                <dd class="col-md-8">{{ booking.createdAt | date('d/m/Y') }}</dd>
+                <dt class="col-md-4">N° de réservation</dt>
+                <dd class="col-md-8">{{ booking.id }}</dd>
+                <dt class="col-md-4">Date d'arrivée</dt>
+                <dd class="col-md-8">{{ booking.startDate | date('d/m/Y') }}</dd>
+                <dt class="col-md-4">Date de départ</dt>
+                <dd class="col-md-8">{{ booking.endDate | date('d/m/Y') }}</dd>
+                <dt class="col-md-4">Durée du séjour</dt>
+                <dd class="col-md-8">{{ booking.duration }} nuitée(s)</dd>
+                <dt class="col-md-4">Montant total TTC</dt>
+                <dd class="col-md-8">{{ booking.amount | number_format(2, ',', ' ') }} &euro;</dd>
+                <dt class="col-md-4">Commentaire</dt>
+                <dd class="col-md-8 text-justify">{{ booking.comment | default('Aucun commentaire') }}</dd>
+            </dl>  
+            <hr>
+            <dl class="row">
+                <dt class="col-md-4">Intitulé de l'annonce</dt>
+                <dd class="col-md-8 text-justify">{{ booking.ad.title }}</dd>
+                <dt class="col-md-4">Introduction de l'annonce</dt>
+                <dd class="col-md-8 text-justify">{{ booking.ad.introduction }}</dd>
+                <dt class="col-md-4">Détails de l'annonce</dt>
+                <dd class="col-md-8 text-justify">{{ booking.ad.content | raw }}</dd>
+            </dl>     
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
