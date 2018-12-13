@@ -90,7 +90,7 @@ class AppFixtures extends Fixture
                 -> setIntroduction($introduction)
                 -> setContent($content)
                 -> setPrice(mt_rand(39.50, 190.50))
-                -> setRooms(mt_rand(1, 7))
+                -> setRooms(mt_rand(1, 3))
                 -> setAuthor($user);
             
 
@@ -109,10 +109,10 @@ class AppFixtures extends Fixture
             for($j = 1; $j <= mt_rand(0,10); $j++) {
                 $booking = new Booking;
 
-                $createdAt = $faker -> dateTimeBetween(`-6 months`);
-                $startDate = $faker -> dateTimeBetween(`-3 months`);
+                $createdAt = $faker -> dateTimeBetween("-6 months", "-3 months");
+                $startDate = $faker -> dateTimeBetween("-3 months", "1 month");
 
-                $duration = mt_rand(1, 10);
+                $duration = mt_rand(1, 7);
 
                 $endDate = (clone $startDate) -> modify("+$duration days");
 
