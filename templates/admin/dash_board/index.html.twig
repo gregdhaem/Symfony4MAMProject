@@ -1,19 +1,20 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Dash Bord {% endblock %}
 
 {% block body %}
     <div class="container-fluid table-responsive">
         <h1 class="my-5"> Vue globale</h1>
+        <div class="row">
+            <ul>
+            <li>{{ ads | length }} annonces</li>
+            <li>{{ bookings | length }} réservationss</li>
+            <li>{{ comments | length }} commentaires</li>
+            <li>{{ images | length }} photos</li>
+            <li>{{ users | length }} utilisateurss</p>
+            </ul>
+        </div>
     </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/DashBoardController.php'|file_link(0) }}">src/Controller/DashBoardController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/dash_board/index.html.twig'|file_link(0) }}">templates/dash_board/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
