@@ -1,0 +1,19 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+    <div class="container-fluid table-responsive">
+        <h1 class="my-5"> Gestion des évaluations</h1>
+    </div>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'src/Controller/AdminCommentController.php'|file_link(0) }}">src/Controller/AdminCommentController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'templates/admin_comment/index.html.twig'|file_link(0) }}">templates/admin_comment/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}

@@ -46,7 +46,7 @@ class AdminBookingController extends AbstractController
      * @Route("/admin/bookings/{id}/delete", name="admin_bookings_delete")
      * 
      * @Security("is_granted('ROLE_ADMIN')",
-     *  message="Vous ne pouvez pas supprimer cette annonce !")
+     *  message="Vous ne pouvez pas supprimer cette réservation!")
      * 
      * @param Booking $booking
      * @param ObjectManager $manager
@@ -73,24 +73,21 @@ class AdminBookingController extends AbstractController
     public function edit(Booking $booking, Request $request, ObjectManager $manager)
     {
         
-        //$booking = new Booking();
         $form = $this -> createForm(BookingType::class, $booking);
 
         $form -> handleRequest($request);
 
         if($form -> isSubmitted() && $form -> isValid()) 
         {
-            //$user = $this -> getUser();
-
-            //$booking -> setBooker($user)
-                    //-> setAd($ad);
 
             if(!$booking -> areDatesBookable()) {
+                dump($booking);
                 $this -> addFlash(
                     'warning',
                     "Les dates que vous avez choisies ne sont pas disponibles"
                 );
             } else {
+                dump($booking);
                 $manager -> persist($booking);
                 $manager -> flush();
     
