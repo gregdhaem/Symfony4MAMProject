@@ -8,8 +8,26 @@
         <div class="row">
             <ul>
             <li>{{ ads | length }} annonces</li>
+                <ul>
+                
+                    {% for ad in ads %}
+
+                    <li> {{ ad.AvgRating | number_format(1, ',', ' ') }} </li>
+
+                    {% endfor %} 
+                
+                </ul>
             <li>{{ bookings | length }} réservationss</li>
             <li>{{ comments | length }} commentaires</li>
+                <ul>
+                
+                {% for ad in ads %}
+
+                   <li> {{ ad.avgRating }} </li>
+
+                {% endfor %} 
+                
+                </ul>
             <li>{{ images | length }} photos</li>
             <li>{{ users | length }} utilisateurss</p>
             </ul>
