@@ -41,7 +41,9 @@ class Booking
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Date(message="Problème de format de date")
-     * @Assert\GreaterThan(propertyPath="startDate", message="La date de départ doit être ultérieure à la date d'arrivée")
+     * @Assert\GreaterThan(propertyPath="startDate", 
+     * message="La date de départ doit être ultérieure à la date d'arrivée", 
+     * groups={"front"})
      */
     private $endDate;
 
@@ -65,6 +67,7 @@ class Booking
      * Callback appellé à chaque réservation
      * 
      * @ORM\PrePersist
+     * @ORM\PreUpdate
      * 
      * @return response
      */

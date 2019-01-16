@@ -1,19 +1,46 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Administration des commentaires {% endblock %}
 
 {% block body %}
-    <div class="container-fluid table-responsive">
-        <h1 class="my-5"> Gestion des évaluations</h1>
+        <div class="container-fluid">
+        <h1 class="my-5"> Gestion des commentaires</h1>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th>Date</th>
+                    <th>Auteur</th>
+                    <th class="text-center">Commentaire</th>
+                    <th class="text-center">Note</th>
+                    <th class="text-center">Annonce</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comment in comments %}
+                <tr>
+                    <td class="text-center">{{ comment.id }}</td>
+                    <td>{{ comment.createdAt|date('d/m/Y H:i') }}</td>
+                    <td>
+                        <img src="{{ comment.author.picture }}" alt="Avatar de {{ comment.author.fullname }}" class="avatar avatar-mini mr-2">
+                        {{ comment.author.fullname }}
+                    </td>
+                    <td >
+                        <span >{{ comment.content }}</span>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge badge-light rounded">{{ comment.rating }}</span>
+                    <td>
+                        <span >{{ comment.ad.title }}</span>
+                    </td>
+                    <td>
+                        <a href="{{ path('admin_comments_edit', {'id': comment.id}) }}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                        <a href="{{ path('admin_comments_delete', {'id': comment.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/AdminCommentController.php'|file_link(0) }}">src/Controller/AdminCommentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/admin_comment/index.html.twig'|file_link(0) }}">templates/admin_comment/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
