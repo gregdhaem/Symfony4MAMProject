@@ -5,20 +5,36 @@ namespace App\Controller;
 use App\Entity\Ad;
 use App\Form\AdType;
 use App\Repository\AdRepository;
+use App\Service\PaginationService;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminAdController extends AbstractController
-{
+{   
+    // @Route("/admin/ads/{page}", name="admin_ads_index", requirements={"page": "\d+"})
+    // @Route("/admin/ads/{page<\d+>?1}" 
     /**
-     * @Route("/admin/ads", name="admin_ads_index")
+     * @Route("/admin/ads/{page<\d+>?1}", name="admin_ads_index")
      */
-    public function index(AdRepository $repo)
+    public function index(AdRepository $repo, $page, PaginationService $pagination)
     {
+
+        $pagination -> setEntityClass(Ad::class)
+                    -> setPage($page);
+
+        $ads = $pagination -> getData();
+
+        $total = count($repo -> findAll());
+
+        $pages = ceil($total / 10);
+
+
         return $this->render('admin/ad/index.html.twig', [
-            'ads' => $repo -> findAll()
+            'ads' => $ads,
+            'pages' => $pages,
+            'page' => $page
         ]);
     }
 
