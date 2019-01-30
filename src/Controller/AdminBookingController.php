@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Booking;
 use App\Form\BookingType;
+use App\Form\AdminBookingType;
+use App\Service\PaginationService;
 use App\Repository\BookingRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -17,13 +19,18 @@ class AdminBookingController extends AbstractController
     /**
      * Affichage de toutes les réservations
      * 
-     * @Route("/admin/bookings", name="admin_bookings_index")
+     * @Route("/admin/bookings/{page<\d+>?1}", name="admin_bookings_index")
      */
-    public function index(BookingRepository $repo)
-    {
+    public function index(BookingRepository $repo, $page, PaginationService $pagination)
+    {   
+
+        $pagination -> setEntityClass(Booking::class)
+                    -> setPage($page);
+
         return $this->render('admin/booking/index.html.twig', [
-            'controller_name' => 'AdminBookingController',
-            'bookings' => $repo -> findAll()
+            'bookings' => $pagination -> getData(),
+            'pages' => $pagination -> getPages(),
+            'page' => $page
         ]);
     }
 
@@ -67,34 +74,41 @@ class AdminBookingController extends AbstractController
     }
 
     /**
+     * Permet de modifier une réservation
+     * 
      * @Route("/admin/bookings/{id}/edit", name="admin_bookings_edit")
      * @IsGranted("ROLE_ADMIN")
+     * 
+     * @return Response
      */
     public function edit(Booking $booking, Request $request, ObjectManager $manager)
     {
-        
-        $form = $this -> createForm(BookingType::class, $booking);
+        $booking -> setAmount(0);
+        $form = $this -> createForm(AdminBookingType::class, $booking, [
+            'validation_groups' => ["Default"]
+        ]);
 
         $form -> handleRequest($request);
 
         if($form -> isSubmitted() && $form -> isValid()) 
         {
 
-            if(!$booking -> areDatesBookable()) {
-                dump($booking);
-                $this -> addFlash(
-                    'warning',
-                    "Les dates que vous avez choisies ne sont pas disponibles"
-                );
-            } else {
-                dump($booking);
+            //if(!$booking -> areDatesBookable()) {
+
+            //} else {
+
                 $manager -> persist($booking);
                 $manager -> flush();
-    
-                return $this -> redirectToRoute('admin_bookings_show', [
+
+                $this -> addFlash(
+                    'warning',
+                    "La réservation n° {$booking -> getId()} a été modifiée"
+                );
+   
+                return $this -> redirectToRoute('admin_bookings_index', [
                     'id' => $booking -> getId(),
                     'withAlert' => true]);
-            }
+            //}
         }
         
         return $this->render('admin/booking/edit.html.twig', [

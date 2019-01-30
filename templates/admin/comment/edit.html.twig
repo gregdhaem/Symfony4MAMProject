@@ -1,0 +1,34 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edition de {{ comment.id }} {% endblock %}
+
+{% form_theme form _self %}
+
+{% block body %}
+
+{{ form_start(form) }}
+
+<div class="container">
+    <h1 class="my-5">Commentaire n° ({{ comment.id }})</h1>
+
+    <div class="alert alert-warning">
+        <p>Annonce : <strong>{{ comment.ad.title }}</strong></p>
+        <p>Utilisateur : <strong>{{ comment.author.fullName | upper }}</strong> id ({{ comment.author.id }})</p>
+        <p>Date du commentaire : <strong>{{ comment.createdAt | date('d/m/Y h:i') }}</strong></p>
+        <p>Note : <strong>{{ comment.rating }}</strong></p>
+    </div>
+
+        {{ form_start(form) }}
+        
+        {{ form_widget(form) }}
+
+    <div class="alert alert-light clearfix">
+        <p>Enregistrez les modifications</p>
+        <button type="submit" class="btn btn-warning float-right"><i class="fas fa-check"></i> Validez</button>
+    </div>
+        
+        {{ form_end(form) }}
+
+</div>
+{% endblock %}
+
