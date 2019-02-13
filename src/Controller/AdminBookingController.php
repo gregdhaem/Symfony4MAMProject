@@ -28,9 +28,10 @@ class AdminBookingController extends AbstractController
                     -> setPage($page);
 
         return $this->render('admin/booking/index.html.twig', [
-            'bookings' => $pagination -> getData(),
-            'pages' => $pagination -> getPages(),
-            'page' => $page
+            'pagination' => $pagination
+            // 'bookings' => $pagination -> getData(),
+            // 'pages' => $pagination -> getPages(),
+            // 'page' => $page
         ]);
     }
 
