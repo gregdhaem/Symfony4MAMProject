@@ -24,17 +24,18 @@ class AdminAdController extends AbstractController
         $pagination -> setEntityClass(Ad::class)
                     -> setPage($page);
 
-        $ads = $pagination -> getData();
+        // $ads = $pagination -> getData();
 
-        $total = count($repo -> findAll());
+        // $total = count($repo -> findAll());
 
-        $pages = ceil($total / 10);
+        // $pages = ceil($total / 10);
 
 
         return $this->render('admin/ad/index.html.twig', [
-            'ads' => $ads,
-            'pages' => $pages,
-            'page' => $page
+            'pagination' => $pagination
+            // 'ads' => $ads,
+            // 'pages' => $pages,
+            // 'page' => $page
         ]);
     }
 
