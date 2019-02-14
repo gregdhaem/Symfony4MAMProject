@@ -65,6 +65,9 @@ class PaginationService {
     }
 
     public function getData() {
+        if (empty($this -> entityClass)) {
+            throw new \Exception("Vous n'avez pas spécifié de classe");
+        }
         // offset
         $offset = $this -> currentPage * $this -> limit - $this -> limit;
 

@@ -14,7 +14,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin:
-            pattern: ^/admin/
+            pattern: ^/admin
             anonymous: true
 
             provider: in_database
