@@ -26,7 +26,7 @@
 
                 <tr>
                     <td class="text-center font-weight-bold">{{ booking.id }}</td>
-                    <td class="text-center">{{ booking.createdAt | date('d/m/Y H:i') }}</td>
+                    <td class="text-center small">{{ booking.createdAt | date('d/m/Y H:i') }}</td>
                     <td class="text-nowrap text-uppercase small">
                         <img src="{{ booking.booker.picture }}" alt="Avatar de {{ booking.booker.fullname }}" class="avatar avatar-mini mr-2">
                         {{ booking.booker.fullname }}
@@ -36,11 +36,11 @@
                         <img src="{{ booking.ad.author.picture }}" alt="Avatar de {{ booking.ad.author.fullname }}" class="avatar avatar-mini mr-2">
                         {{ booking.ad.author.fullname }}
                     </td>
-                    <td class="text-center">{{ booking.startDate | date('d/m/Y') }}</td>
-                    <td class="text-center">{{ booking.endDate | date('d/m/Y') }}</td>
+                    <td class="text-center small">{{ booking.startDate | date('d/m/Y') }}</td>
+                    <td class="text-center small">{{ booking.endDate | date('d/m/Y') }}</td>
                     <td class="text-center">
                         <span class="badge badge-light rounded">{{ booking.amount | number_format(2, ',', ' ') }}</span>
-                    <td class="small">{{ booking.comment | slice(1, 30)}} ....</td>
+                    <td class="small">{{ booking.comment | slice(0, 30)}} ....</td>
                     <td class="text-center">
                         <a href="{{ path('admin_bookings_show', {'id': booking.id}) }}" class="btn btn-light"><i class="fas fa-eye"></i></a>
                         <a href="{{ path('admin_bookings_edit', {'id': booking.id}) }}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
