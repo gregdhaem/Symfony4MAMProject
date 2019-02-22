@@ -1,65 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Bienvenue sur 
-{% endblock %}
-
-{% block header %}
-
-{% endblock %}
+{% block title %}Bienvenue sur {% endblock %}
 
 {% block body %}
 
-    <div class="container">
-        <div class="jumbotron mt-4 bg-light text-center">
-            <h1 class="display-3">Bienvenue sur Air Be and Be</h1>
-            <p class="lead text-warning">Comme à la maison chez les autres</p>
-            <hr class="my-4">
-            <p class="text-primary">Appartements, maisons à louer entre particuliers</p>
-            <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Plus d'informations ?!</a>
-            </p>
-        </div>
+<div class="container">
+    <div class="jumbotron mt-4 bg-light text-center">
+        <h1 class="display-3">Bienvenue sur Air Be and Be</h1>
+        <p class="lead text-warning">Comme à la maison chez les autres</p>
+        <hr class="my-4">
+        <p class="text-warning">Appartements, maisons à louer entre particuliers</p>
+        <p class="lead">
+            <a class="btn btn-warning btn-lg" href="#" role="button">Plus d'info...</a>
+        </p>
+    </div>
 
-        <h1 class="my-5">Les mieux notées</h1>
+    <h2 class="h1 my-5">Les annonces les mieux notées</h2>
 
-        <h2 class="my-3">Nos annonces stars</h2>
-        <div class="row">
-            {% for ad in ads %}
-                {% if ad.AvgRating > 4 %}
-                
-                {% include 'ad/_ad.html.twig' %}
-                
-                {% endif %}
-            {% endfor %}
-        </div>
+    <div class="row">
+        {% for data in ads %}
+            {% include 'ad/_ad.html.twig' with {'ad': data.annonce} %}
+        {% endfor %}
+    </div>
 
-        <h2 class="my-3">Nos propriétaires stars et leur annonce</h2>
-        <div class="row">
-            {% for ad in ads %}
-            {% if ad.AvgRating > 4 %}
-            
-            <div class="col-md-6">
-                <div class="card border-secondary mb-3">
-                    <div class="card-body">
-                        <h4 class="card-title">{{ ad.author.fullName }}</h4>
-                        <hr>
-                        <div class="card-text clearfix align-items-center">
-                            <img src={{ ad.author.picture }} alt="Avatar de {{ ad.author.fullName }}" class="float-left mr-3 avatar">
-                            <p>{{ ad.author.introduction }}</p>
-                            <h4 class="card-title">
-                                <a href="{{ path('ads_show', {'slug': ad.slug}) }}">
-                            {{ ad.title }}
-                                </a>
-                            </h4>
-                        </div>
-                        <a href="{{ path('user_show', {'slug' : ad.author.slug })}}" class="btn btn-warning float-right my-3"> Plus sur {{ ad.author.fullName }}</a>
+    <h2 class="h1 my-5">Les propriétaires les mieux notés</h2>
+    
+    <div class="row">
+        {% for data in users %}
+        <div class="col">
+            <div class="card border-secondary mb-3">
+                <div class="card-body">
+                    <h4 class="card-title">{{data.user.fullName}}</h4>
+
+                    <hr>
+
+                    <div class="card-text">
+                        <img src="{{data.user.picture}}" alt="Avatar de {{data.user.fullName}}" class="float-left mr-3">
+                        <p>{{data.user.introduction}}</p>
+                        <a href="{{ path('user_show', {'slug': data.user.slug})}}" class="btn btn-warning float-right">En savoir plus!</a>
                     </div>
                 </div>
-            </div>    
-            {% endif %}
-            {% endfor %}   
+            </div>
         </div>
+        {% endfor %}
     </div>
-    
+</div>
 {% endblock %}

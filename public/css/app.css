@@ -65,6 +65,10 @@ p {
     color: white;
 }
 
+.table-dashboard {
+    table-layout: fixed;
+}
+
 @media screen and (max-width: 499px) {
     .display-3 {
         font-size: 3rem;

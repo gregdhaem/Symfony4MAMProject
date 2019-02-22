@@ -38,7 +38,7 @@ class AdminBookingController extends AbstractController
     /**
      * Permet d'afficher une réservation
      * 
-     * @Route("/admin/bookings/{id}", name="admin_bookings_show")
+     * @Route("/admin/bookings/{id}/show", name="admin_bookings_show")
      * 
      * @return Response
      */
