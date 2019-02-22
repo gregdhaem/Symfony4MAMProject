@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Bienvenue sur le meilleur réseau d'appartements
-{% endblock %}
+{% block title %}Bienvenue sur {% endblock %}
 
 {% block body %}
 
@@ -11,13 +9,13 @@
         <h1 class="display-3">Bienvenue sur Air Be and Be</h1>
         <p class="lead text-warning">Comme à la maison chez les autres</p>
         <hr class="my-4">
-        <p class="text-primary">Appartements, maisons à louer entre particuliers</p>
+        <p class="text-warning">Appartements, maisons à louer entre particuliers</p>
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Plus d'informations ?!</a>
+            <a class="btn btn-warning btn-lg" href="#" role="button">Plus d'info...</a>
         </p>
     </div>
 
-    <h2 class="h1 my-5">Nos appartements stars</h2>
+    <h2 class="h1 my-5">Les annonces les mieux notées</h2>
 
     <div class="row">
         {% for data in ads %}
@@ -25,7 +23,7 @@
         {% endfor %}
     </div>
 
-    <h2 class="h1 my-5">Nos propriétaires stars !</h2>
+    <h2 class="h1 my-5">Les propriétaires les mieux notés</h2>
     
     <div class="row">
         {% for data in users %}
@@ -39,7 +37,7 @@
                     <div class="card-text">
                         <img src="{{data.user.picture}}" alt="Avatar de {{data.user.fullName}}" class="float-left mr-3">
                         <p>{{data.user.introduction}}</p>
-                        <a href="{{ path('user_show', {'slug': data.user.slug})}}" class="btn btn-success float-right">En savoir plus!</a>
+                        <a href="{{ path('user_show', {'slug': data.user.slug})}}" class="btn btn-warning float-right">En savoir plus!</a>
                     </div>
                 </div>
             </div>

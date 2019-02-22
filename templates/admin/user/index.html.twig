@@ -1,19 +1,37 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Les utilisateurs de {% endblock %}
 
 {% block body %}
-    <div class="container-fluid table-responsive">
-        <h1 class="my-5">Gestion des utilisateurs</h1>
+        <div class="container-fluid">
+        <h1 class="my-5"> Gestion des utilisateurs</h1>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Photo</th>
+                    <th>Introduction</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in pagination.data %}
+                <tr>
+                    <td class="text-center">{{ user.id }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>
+                        <img src="{{ user.picture }}" alt="Avatar de {{ user.fullname }}" class="avatar mr-2">
+                    </td>
+                    <td>{{ user.introduction }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {{ pagination.display() }}
     </div>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/AdminUserController.php'|file_link(0) }}">src/Controller/AdminUserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/admin_user/index.html.twig'|file_link(0) }}">templates/admin_user/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
